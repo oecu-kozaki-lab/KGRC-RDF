@@ -1,0 +1,20 @@
+name: CI(pull request)
+
+on: pull_request
+
+jobs:
+  rdflint:
+    name: rdflint
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2.0.0
+    - uses: actions/setup-java@v1.3.0
+      with:
+        java-version: '11.0.2'
+        java-package: jre
+        architecture: x64
+    - name: download_rdflint
+      run: wget https://jitpack.io/com/github/imas/rdflint/0.1.1/rdflint-0.1.1.jar -O rdflint.jar
+    - name: run_rdflint
+      run: java -jar rdflint.jar -targetdir ./2019/
